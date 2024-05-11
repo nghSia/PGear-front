@@ -2,6 +2,8 @@
   <span class="nav-bar-brand">PGear</span>
   <span class="spacer"></span>
   <button mat-button>Suivi Commande</button>
-  <button mat-button>S'inscrire</button>
-  <button mat-button>Se Connecter</button>
+  <button mat-button routerLink="/register" routerLinkActive="active">S'inscrire</button>
+  <button mat-button routerLink="/login" routerLinkActive="active">Se Connecter</button>
 </mat-toolbar>
+
+<router-outlet></router-outlet>
