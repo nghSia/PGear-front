@@ -1,7 +1,19 @@
-.spacer {
-    margin-left : 10px;
+.navbar{
+    display: flex;
+    align-items: center;
+    padding: 0 16px;
 }
 
-.active {
-    background-color: #920D50;
+.spacer {
+    flex: 1;
+}
+
+button{
+    color: white;
+    text-transform: uppercase;
+    margin-left: 8px;
+}
+
+button.active{
+    font-weight: 600;
 }
