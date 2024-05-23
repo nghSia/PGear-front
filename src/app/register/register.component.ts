@@ -15,14 +15,14 @@ export class RegisterComponent implements OnInit {
   hidePassword = true;
 
   constructor(
-    private fb : FormBuilder,
+    private formBuilder : FormBuilder,
     private snackbar : MatSnackBar,
     private authService : AuthentificationService,
     private router: Router
   ){}
 
   ngOnInit(): void {
-      this.signupForm = this.fb.group({
+      this.signupForm = this.formBuilder.group({
         username:[null, [Validators.required]],
         email:[null, [Validators.required, Validators.email]],
         password:[null, [Validators.required]],
@@ -46,11 +46,11 @@ export class RegisterComponent implements OnInit {
 
       this.authService.register(this.signupForm.value).subscribe(
         {
-          next : (response) => {
+          next : () => {
             this.snackbar.open('Inscription termine', 'Close', {duration : 5000});
             this.router.navigateByUrl("/login");
           },
-          error: (error) => {
+          error: () => {
             this.snackbar.open('Inscription termine avec erreur', 'Close', {duration : 5000, panelClass: 'error-snackbar'});
           }
         }

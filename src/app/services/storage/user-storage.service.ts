@@ -15,8 +15,8 @@ export class UserStorageService {
     window.localStorage.setItem(v_TOKEN, p_token);
   }
 
-  public saveUser(p_user : string) :void{
+  public saveUser(p_user : any) :void{
     window.localStorage.removeItem(v_USER);
-    window.localStorage.setItem(v_TOKEN, JSON.stringify(p_user));
+    window.localStorage.setItem(v_USER, JSON.stringify(p_user));
   }
 }
