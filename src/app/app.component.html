@@ -1,9 +1,61 @@
-<mat-toolbar color="primary" class ="navbar">
-  <span class="nav-bar-brand">PGear</span>
-  <span class="spacer"></span>
-  <button mat-button>Suivi Commande</button>
-  <button mat-button routerLink="/register" routerLinkActive="active">S'inscrire</button>
-  <button mat-button routerLink="/login" routerLinkActive="active">Se Connecter</button>
-</mat-toolbar>
+<div *ngIf="!isAdmin && !isCustomer">
+  <mat-toolbar color="primary" class ="navbar">
+    <span class="nav-bar-brand">PGear</span>
+    <span class="spacer"></span>
+    <button mat-button>Suivi Commande</button>
+    <button mat-button routerLink="/register" routerLinkActive="active">S'inscrire</button>
+    <button mat-button routerLink="/login" routerLinkActive="active">Se Connecter</button>
+  </mat-toolbar>
+</div>
+
+<div *ngIf="isAdmin">
+  <mat-toolbar color="primary" class ="navbar">
+    <span class="nav-bar-brand">PGear</span>
+    <span class="spacer"></span>
+    <button mat-button routerLink="/admin/acceuil" routerLinkActive="active">Acceuil</button>
+    <button mat-button routerLink="/admin/analytics" routerLinkActive="active">Analytics</button>
+    <button mat-button [mat-menu-trigger-for]="categoriesMenu">
+      Category
+      <i class="material-icons">arrow_drop_down</i>
+    </button>
+    <button mat-button routerLink="/admin/produit" routerLinkActive="active">Product</button>
+    <button mat-button routerLink="/admin/commande" routerLinkActive="active">Commande</button>
+    <button mat-button routerLink="/admin/ajout-code-promo" routerLinkActive="active">Ajout Code Promo</button>
+    <button mat-button routerLink="/admin/codes-promo" routerLinkActive="active">Code Promo</button>
+    <button mat-button routerLink="active" (click)="signout()">Deconnexion</button>
+
+    <mat-menu #categoriesMenu="matMenu" class="custom-menu-primary">
+      <ng-container *ngFor="let category of categories">
+        <button mat-menu-item class="buttonmat">{{ category.nomCategory }}</button>
+      </ng-container>
+      <button mat-menu-item routerLink="/admin/ajout-categorie" routerLinkActive="active" class="buttonmat">Ajout catégorie</button>
+    </mat-menu>
+
+  </mat-toolbar>
+</div>
+
+<div *ngIf="isCustomer">
+  <mat-toolbar color="primary" class ="navbar">
+    <span class="nav-bar-brand">PGear</span>
+    <span class="spacer"></span>
+    <button mat-button routerLink="/customer/acceuil" routerLinkActive="active">Acceuil</button>
+    <button mat-button routerLink="/customer/panier" routerLinkActive="active">Panier</button>
+    <button mat-button [mat-menu-trigger-for]="categoriesMenu">
+      Category
+      <i class="material-icons">arrow_drop_down</i>
+    </button>
+    <button mat-button routerLink="/customer/commande-client" routerLinkActive="active">Vos Commandes</button>
+    <button mat-button routerLink="/customer/profile" routerLinkActive="active">Compte</button>
+    <button mat-button routerLink="active" (click)="signout()">Deconnexion</button>
+
+    <mat-menu #categoriesMenu="matMenu" class="custom-menu-primary">
+      <ng-container *ngFor="let category of categories">
+        <button mat-menu-item class="buttonmat">{{ category.nomCategory }}</button>
+      </ng-container>
+    </mat-menu>
+
+  </mat-toolbar>
+</div>
+
 
 <router-outlet></router-outlet>

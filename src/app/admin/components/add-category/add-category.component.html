@@ -1,0 +1,19 @@
+<div class="container">
+    <h2>Ajouter Category</h2>
+    <form [formGroup]="categoryForm">
+        
+        <mat-form-field appearance="outline" class="form-field">
+            <mat-label>Nom Category</mat-label>
+            <input matInput type="text" placeholder="Nom de categorie" formControlName="nomCategory">
+            <mat-error *ngIf="categoryForm.get('name')?.hasError('required')">Ce champs est obligatoire</mat-error>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline" class="form-field">
+            <mat-label>Description</mat-label>
+            <input matInput type="text" placeholder="Description de categorie" formControlName="descriptionCategory">
+            <mat-error *ngIf="categoryForm.get('description')?.hasError('description')">Ce champs est obligatoire</mat-error>
+        </mat-form-field>
+
+        <button mat-raised-button color="accent" type="submit" [disabled]="categoryForm.invalid" (click)="onSubmit()">Ajouter Category</button>
+    </form>
+</div>>

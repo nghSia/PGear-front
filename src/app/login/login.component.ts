@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AuthentificationService } from '../services/authentification/authentification.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
+import { UserStorageService } from '../services/storage/user-storage.service';
 
 @Component({
   selector: 'app-login',
@@ -43,7 +44,11 @@ export class LoginComponent implements OnInit {
     this.s_authService.login(email, password).subscribe(
       {
         next : () => {
-          this.snackBar.open('Connexion reussie', 'OK', {duration : 5000});
+          if(UserStorageService.isAdmin()){
+            this.router.navigateByUrl('/admin/acceuil');
+          } else if (UserStorageService.isCustomer()){
+            this.router.navigateByUrl('/customer/acceuil');
+          }
         },
         error : () => {
           this.snackBar.open('Ce compte est introuvable', 'ERROR', {duration : 5000});
