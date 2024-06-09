@@ -7,6 +7,9 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatInputModule } from '@angular/material/input';
 import { MatMenuModule } from '@angular/material/menu';
+import { MatSelectModule } from '@angular/material/select';
+import { MatDividerModule } from '@angular/material/divider';
+
 
 
 
@@ -19,7 +22,9 @@ import { MatMenuModule } from '@angular/material/menu';
         MatIconModule,
         MatSnackBarModule,
         MatInputModule,
-        MatMenuModule
+        MatMenuModule,
+        MatSelectModule,
+        MatDividerModule
     ]
 })
 export class MaterialModule { }

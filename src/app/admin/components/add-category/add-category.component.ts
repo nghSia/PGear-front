@@ -13,14 +13,14 @@ export class AddCategoryComponent implements OnInit{
   categoryForm! : FormGroup;
 
   constructor(
-    private v_formBuilder : FormBuilder,
-    private v_router : Router,
-    private v_snackbar : MatSnackBar,
+    private formBuilder : FormBuilder,
+    private router : Router,
+    private m_snackbar : MatSnackBar,
     private s_adminService : AdminService
   ){}
 
   ngOnInit(): void {
-    this.categoryForm = this.v_formBuilder.group({
+    this.categoryForm = this.formBuilder.group({
       nomCategory : [null, [Validators.required]],
       descriptionCategory : [null, [Validators.required]]
     })
@@ -28,17 +28,18 @@ export class AddCategoryComponent implements OnInit{
 
   onSubmit(): void{
     if(this.categoryForm.valid){
-      this.s_adminService.addCategory(this.categoryForm.value).subscribe((res) => {
-        if(res.id !=null){
-          console.log("res null");
-          this.v_snackbar.open('Ajout de categorie terminee', 'Close', {
-            duration:5000
-          });
-          window.location.reload();
-          this.v_router.navigateByUrl('/admin/acceuil');
-        } else{
-          console.log("res non null");
-          this.v_snackbar.open(res.message, 'Close', {
+      this.s_adminService.addCategory(this.categoryForm.value).subscribe({
+        next: (res: any) => {
+          if(res.id !=null){
+            console.log("res null");
+            this.m_snackbar.open('Ajout de categorie terminee', 'Fermer', {
+              duration:5000
+            });
+            this.router.navigateByUrl('/admin/accueil');
+          }
+        },
+        error: (error: any) => {
+          this.m_snackbar.open(error.message, 'Fermer', {
             duration:5000,
             panelClass: 'error-snackbar'
           });

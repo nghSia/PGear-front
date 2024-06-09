@@ -8,13 +8,16 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { AddCategoryComponent } from './components/add-category/add-category.component';
 import { MaterialModule } from '../material.module';
+import { AddProductComponent } from './components/add-product/add-product.component';
+import { SharedModule } from '../shared/shared.module';
 
 
 @NgModule({
   declarations: [
     AdminComponent,
     AdminAcceuilComponent,
-    AddCategoryComponent
+    AddCategoryComponent,
+    AddProductComponent
   ],
   imports: [
     CommonModule,
@@ -22,7 +25,8 @@ import { MaterialModule } from '../material.module';
     FormsModule,
     ReactiveFormsModule,
     HttpClientModule,
-    MaterialModule
+    MaterialModule,
+    SharedModule
   ]
 })
 export class AdminModule { }

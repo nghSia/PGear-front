@@ -45,9 +45,9 @@ export class LoginComponent implements OnInit {
       {
         next : () => {
           if(UserStorageService.isAdmin()){
-            this.router.navigateByUrl('/admin/acceuil');
+            this.router.navigateByUrl('/admin/accueil');
           } else if (UserStorageService.isCustomer()){
-            this.router.navigateByUrl('/customer/acceuil');
+            this.router.navigateByUrl('/customer/accueil');
           }
         },
         error : () => {

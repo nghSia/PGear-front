@@ -40,18 +40,18 @@ export class RegisterComponent implements OnInit {
       const confirmpassword = this.signupForm.get('confirmpassword')?.value;
 
       if(password !== confirmpassword){
-        this.snackbar.open('Les mots de passes ne correspondent pas', 'Close', {duration : 5000, panelClass: 'error-snackbar'});
+        this.snackbar.open('Les mots de passes ne correspondent pas', 'Fermer', {duration : 5000, panelClass: 'error-snackbar'});
         return;
       }
 
       this.authService.register(this.signupForm.value).subscribe(
         {
           next : () => {
-            this.snackbar.open('Inscription termine', 'Close', {duration : 5000});
+            this.snackbar.open('Inscription termine', 'Fermer', {duration : 5000});
             this.router.navigateByUrl("/login");
           },
           error: () => {
-            this.snackbar.open('Inscription termine avec erreur', 'Close', {duration : 5000, panelClass: 'error-snackbar'});
+            this.snackbar.open('Inscription termine avec erreur', 'Fermer', {duration : 5000, panelClass: 'error-snackbar'});
           }
         }
       )

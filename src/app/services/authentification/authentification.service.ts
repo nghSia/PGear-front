@@ -16,14 +16,14 @@ export class AuthentificationService {
     private v_http: HttpClient, private v_userStorageService : UserStorageService) { }
 
   register(p_signupRequest:any): Observable<any> {
-    return this.v_http.post(BASIC_URL+ "sign-up", p_signupRequest);
+    return this.v_http.post(BASIC_URL+ `sign-up`, p_signupRequest);
   }
 
   login(email: string, password: string) : any{
     const headers = new HttpHeaders().set('Content-Type', 'application/json');
     const body = {email, password};
     console.log("headears : " + JSON.stringify(headers) + " body: " + JSON.stringify(body));
-    return this.v_http.post(BASIC_URL + 'login', body, { headers, observe: 'response'}).pipe(
+    return this.v_http.post(BASIC_URL + `login`, body, { headers, observe: 'response'}).pipe(
       map((res) =>{
         console.log("rights exists");
         const token = res.headers.get('authorization')?.substring(7);

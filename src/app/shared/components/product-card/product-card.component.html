@@ -1,0 +1,34 @@
+<div class="list-products">
+    <mat-card class="product-card" *ngFor="let product of products">
+        <div class="product-image">
+            <img [src]="product.imgProduit" alt="product-image">
+        </div>
+        <div class="product-details">
+            <h2 class="product-name">{{product.nomProduit}}</h2>
+            <p class="product-description">{{product.descriptionProduit}}</p>
+    
+            <mat-divider></mat-divider>
+            <div class="product-info">
+                <div class="info-row">
+                    <span class="info-label">Prix : </span>
+                    <span class="info-value">{{product.prix}} €</span>
+                </div>
+                <div class="info-row">
+                    <span class="info-label">Categorie :</span>
+                    <span class="info-value">{{product.nomCategory}}</span>
+                </div>
+            </div>
+        </div>
+
+        <!--Ce morceau de code ne devra s'afficher que si l'utilisateur connecte est un admin-->
+        <mat-divider *ngIf="isAdmin"></mat-divider>
+        <div class="operations" *ngIf="isAdmin">
+            <button mat-raised-button color="accent" class="update-button" 
+                [routerLink]="'/admin/ajout-produit/' + product.id">Modifier</button>
+            <button mat-raised-button color="warn" class="delete-button" (click)="deleteProduct(product.id)">
+                Supprimer
+            </button>
+        </div>
+        <!--Ce morceau de code ne devra s'afficher que si l'utilisateur connecte est un admin-->
+    </mat-card>
+</div>
