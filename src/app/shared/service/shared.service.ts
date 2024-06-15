@@ -21,7 +21,11 @@ export class SharedService {
     return this.v_http.get<product[]>(BASIC_URL + `product/get-all`);
   }
 
-  getProductsByName(p_name : any): Observable<any[]>{
+  getProductsByName(p_name : string): Observable<any[]>{
     return this.v_http.get<product[]>(BASIC_URL + `product/find/${p_name}`);
+  }
+
+  getProductsByCategory(p_nomCategory : string): Observable<any[]>{
+    return this.v_http.get<product[]>(BASIC_URL + `product/find/category/${p_nomCategory}`);
   }
 }

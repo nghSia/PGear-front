@@ -7,7 +7,6 @@ import { RouterModule } from '@angular/router';
 import { PoliticComponent } from './components/politic/politic.component';
 
 
-
 @NgModule({
   declarations: [
     ProductListComponent,

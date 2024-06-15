@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { product } from '../../models/product';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { AdminService } from 'src/app/admin/service/admin.service';
@@ -12,13 +12,14 @@ export class ProductListComponent {
   @Input() products: product[] = [];
   @Input() isAdmin: boolean = false;
   @Input() isCustomer: boolean = false;
-  @Input() refreshProductsCallback: () => void; // Ajout de la fonction de rappel
+  @Input() refreshProductsCallback: () => void;
+  @Input() refreshByCategorie: () => void;
 
   constructor(
     private s_adminService : AdminService,
     private m_snackBar : MatSnackBar,
   ){}
-  
+
   deleteProduct(p_productId:any){
     this.s_adminService.deleteProduct(p_productId).subscribe({
       next: (res: any) => {

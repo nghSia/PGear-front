@@ -1,21 +1,19 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { VisitorRoutingModule } from './visitor-routing.module';
-import { VisitorComponent } from './visitor.component';
-import { VisitorAccueilComponent } from './composant/visitor-accueil/visitor-accueil.component';
 import { MaterialModule } from '../material.module';
 import { ReactiveFormsModule } from '@angular/forms';
 import { SharedModule } from '../shared/shared.module';
+import { HomeComponent } from './composant/home/home.component';
+import { HomeRoutingModule } from './home-routing.module';
 
 
 @NgModule({
   declarations: [
-    VisitorComponent,
-    VisitorAccueilComponent
+    HomeComponent
   ],
   imports: [
     CommonModule,
-    VisitorRoutingModule,
+    HomeRoutingModule,
     MaterialModule,
     ReactiveFormsModule,
     SharedModule

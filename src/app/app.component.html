@@ -1,8 +1,9 @@
-<div *ngIf="!isAdmin && !isCustomer">
-  <mat-toolbar color="primary" class ="navbar">
+<div *ngIf="!isAdmin && !isCustomer && !isMobile">
+  <mat-toolbar color="primary" class="navbar">
     <span class="nav-bar-brand">PGear</span>
     <span class="spacer"></span>
-    <button mat-button routerLink="" routerLinkActive="active" (click)="reload()">Accueil</button>
+
+    <button mat-button routerLink="/" routerLinkActive="active">Accueil</button>
     <button mat-button [mat-menu-trigger-for]="categoriesMenu">
       Categorie
       <i class="material-icons">arrow_drop_down</i>
@@ -12,14 +13,42 @@
 
     <mat-menu #categoriesMenu="matMenu" class="custom-menu-primary">
       <ng-container *ngFor="let category of m_listOfcategories">
-        <button mat-menu-item class="buttonmat">{{ category.nomCategory }}</button>
+        <button mat-menu-item class="buttonmat" (click)="setCategory(category.nomCategory)">
+          {{ category.nomCategory }}
+        </button>
       </ng-container>
     </mat-menu>
-
   </mat-toolbar>
 </div>
 
-<div *ngIf="isAdmin">
+<div *ngIf="!isAdmin && !isCustomer && isMobile">
+  <mat-toolbar color="primary" class="navbar">
+    <span class="nav-bar-brand">PGear</span>
+    <span class="spacer"></span>
+
+    <button mat-icon-button class="menu-button" (click)="toggleSidenav()">
+      <mat-icon>menu</mat-icon>
+    </button>
+  </mat-toolbar>
+
+  <div class="sidenav" *ngIf="sidenavOpened">
+    <button mat-button routerLink="/" routerLinkActive="active">Accueil</button>
+    <button mat-button [mat-menu-trigger-for]="categoriesMenuMobile">Categorie</button>
+    <button mat-button routerLink="/register" routerLinkActive="active">S'inscrire</button>
+    <button mat-button routerLink="/login" routerLinkActive="active">Se Connecter</button>
+
+    <mat-menu #categoriesMenuMobile="matMenu" class="custom-menu-primary">
+      <ng-container *ngFor="let category of m_listOfcategories">
+        <button mat-menu-item class="buttonmat" (click)="getProductsByCategory(category.nomCategory)">
+          {{ category.nomCategory }}
+        </button>
+      </ng-container>
+    </mat-menu>
+  </div>
+</div>
+
+
+<div *ngIf="isAdmin && !isMobile">
   <mat-toolbar color="primary" class ="navbar">
     <span class="nav-bar-brand">PGear</span>
     <span class="spacer"></span>
@@ -35,7 +64,9 @@
 
     <mat-menu #categoriesMenu="matMenu" class="custom-menu-primary">
       <ng-container *ngFor="let category of m_listOfcategories">
-        <button mat-menu-item class="buttonmat">{{ category.nomCategory }}</button>
+        <button mat-menu-item class="buttonmat" (click)="getProductsByCategory(category.nomCategory)">
+          {{ category.nomCategory }}
+        </button>
       </ng-container>
       <button mat-menu-item routerLink="/admin/ajout-categorie" routerLinkActive="active" class="buttonmat">Ajout catégorie</button>
     </mat-menu>
@@ -43,27 +74,92 @@
   </mat-toolbar>
 </div>
 
-<div *ngIf="isCustomer">
+
+<div *ngIf="isAdmin && isMobile">
+  <mat-toolbar color="primary" class="navbar">
+    <span class="nav-bar-brand">PGear</span>
+    <span class="spacer"></span>
+
+    <button mat-icon-button class="menu-button" (click)="toggleSidenav()">
+      <mat-icon>menu</mat-icon>
+    </button>
+  </mat-toolbar>
+
+  <div class="sidenav" *ngIf="sidenavOpened">
+    <button mat-button routerLink="/admin/accueil" routerLinkActive="active">Accueil</button>
+    <button mat-button [mat-menu-trigger-for]="categoriesMenuMobile">Categorie</button>
+    <button mat-button routerLink="/admin/ajout-produit" routerLinkActive="active">Produit</button>
+    <button mat-button routerLink="/admin/commande" routerLinkActive="active">Commande</button>
+    <button mat-button routerLink="/admin/codes-promo" routerLinkActive="active">Code Promo</button>
+    <button mat-button routerLink="active" (click)="signout()">Deconnexion</button>
+
+    <mat-menu #categoriesMenuMobile="matMenu" class="custom-menu-primary">
+      <ng-container *ngFor="let category of m_listOfcategories">
+        <button mat-menu-item class="buttonmat" (click)="getProductsByCategory(category.nomCategory)">
+          {{ category.nomCategory }}
+        </button>
+      </ng-container>
+      <button mat-menu-item routerLink="/admin/ajout-categorie" routerLinkActive="active" class="buttonmat">Ajout catégorie</button>
+    </mat-menu>
+  </div>
+</div>
+
+
+<div *ngIf="isCustomer && !isMobile">
   <mat-toolbar color="primary" class ="navbar">
     <span class="nav-bar-brand">PGear</span>
     <span class="spacer"></span>
+    
     <button mat-button routerLink="/customer/accueil" routerLinkActive="active">Accueil</button>
-    <button mat-button routerLink="/customer/panier" routerLinkActive="active">Panier</button>
     <button mat-button [mat-menu-trigger-for]="categoriesMenu">
       Category
       <i class="material-icons">arrow_drop_down</i>
     </button>
+    <button mat-button routerLink="/customer/panier" routerLinkActive="active">Panier</button>
     <button mat-button routerLink="/customer/commande-client" routerLinkActive="active">Vos Commandes</button>
     <button mat-button routerLink="/customer/profile" routerLinkActive="active">Compte</button>
     <button mat-button routerLink="active" (click)="signout()">Deconnexion</button>
 
     <mat-menu #categoriesMenu="matMenu" class="custom-menu-primary">
       <ng-container *ngFor="let category of m_listOfcategories">
-        <button mat-menu-item class="buttonmat">{{ category.nomCategory }}</button>
+        <button mat-menu-item class="buttonmat" (click)="getProductsByCategory(category.nomCategory)">
+          {{ category.nomCategory }}
+        </button>
       </ng-container>
     </mat-menu>
 
   </mat-toolbar>
 </div>
 
+<div *ngIf="isCustomer && isMobile">
+  <mat-toolbar color="primary" class="navbar">
+    <span class="nav-bar-brand">PGear</span>
+    <span class="spacer"></span>
+
+    <button mat-icon-button class="menu-button" (click)="toggleSidenav()">
+      <mat-icon>menu</mat-icon>
+    </button>
+  </mat-toolbar>
+
+  <div class="sidenav" *ngIf="sidenavOpened">
+    <button mat-button routerLink="/customer/accueil" routerLinkActive="active">Accueil</button>
+    <button mat-button [mat-menu-trigger-for]="categoriesMenuMobile">Categorie</button>
+    <button mat-button routerLink="/customer/panier" routerLinkActive="active">Panier</button>
+    <button mat-button routerLink="/customer/commande-client" routerLinkActive="active">Vos Commandes</button>
+    <button mat-button routerLink="/customer/profile" routerLinkActive="active">Compte</button>
+    <button mat-button routerLink="active" (click)="signout()">Deconnexion</button>
+
+    <mat-menu #categoriesMenuMobile="matMenu" class="custom-menu-primary">
+      <ng-container *ngFor="let category of m_listOfcategories">
+        <button mat-menu-item class="buttonmat" (click)="getProductsByCategory(category.nomCategory)">
+          {{ category.nomCategory }}
+        </button>
+      </ng-container>
+      <button mat-menu-item routerLink="/admin/ajout-categorie" routerLinkActive="active" class="buttonmat">Ajout catégorie</button>
+    </mat-menu>
+  </div>
+</div>
+
+
 <router-outlet></router-outlet>
+

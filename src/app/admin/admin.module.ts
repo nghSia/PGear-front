@@ -2,7 +2,6 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 import { AdminRoutingModule } from './admin-routing.module';
-import { AdminComponent } from './admin.component';
 import { AdminAcceuilComponent } from './components/admin-acceuil/admin-acceuil.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
@@ -14,7 +13,6 @@ import { SharedModule } from '../shared/shared.module';
 
 @NgModule({
   declarations: [
-    AdminComponent,
     AdminAcceuilComponent,
     AddCategoryComponent,
     AddProductComponent
