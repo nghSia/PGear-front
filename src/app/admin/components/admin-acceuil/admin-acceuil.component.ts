@@ -1,9 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { product } from '../../models/product.modele';
 import { AdminService } from '../../service/admin.service';
-import { elementAt } from 'rxjs';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-admin-acceuil',
@@ -16,7 +14,6 @@ export class AdminAcceuilComponent implements OnInit{
 
   constructor(
     private s_adminService : AdminService,
-    private m_snackBar : MatSnackBar,
     private formBuilder : FormBuilder
     
   ){}
@@ -49,9 +46,4 @@ export class AdminAcceuilComponent implements OnInit{
       });
     })
   }
-
-  reload(){
-    window.location.reload();
-  }
-
 }

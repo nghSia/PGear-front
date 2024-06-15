@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { UserStorageService } from './services/storage/user-storage.service';
 import { Router } from '@angular/router';
 import { category } from './admin/models/category.modele';
-import { SharedService } from './shared/service/visitor/shared.service';
+import { SharedService } from './shared/service/shared.service';
 
 @Component({
   selector: 'app-root',

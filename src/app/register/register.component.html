@@ -48,6 +48,11 @@
                     </mat-error>
                 </mat-form-field>
 
+                <section class="terms-section">
+                    <mat-checkbox formControlName="acceptTerms" class="example-margin"></mat-checkbox>
+                    <span class="conditions" (click)="openDialog()">J'accepte les conditions d'utilisation</span>
+                </section>
+
                 <button mat-raised-button color="accent" type="submit" [disabled]="signupForm.invalid" (click)="OnSubmit()">
                     S'inscrire
                 </button>

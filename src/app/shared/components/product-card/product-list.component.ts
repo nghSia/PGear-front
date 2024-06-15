@@ -4,13 +4,14 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { AdminService } from 'src/app/admin/service/admin.service';
 
 @Component({
-  selector: 'app-product-card',
-  templateUrl: './product-card.component.html',
-  styleUrls: ['./product-card.component.scss']
+  selector: 'app-product-list',
+  templateUrl: './product-list.component.html',
+  styleUrls: ['./product-list.component.scss']
 })
-export class ProductCardComponent {
+export class ProductListComponent {
   @Input() products: product[] = [];
   @Input() isAdmin: boolean = false;
+  @Input() isCustomer: boolean = false;
   @Input() refreshProductsCallback: () => void; // Ajout de la fonction de rappel
 
   constructor(

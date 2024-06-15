@@ -30,5 +30,10 @@
             </button>
         </div>
         <!--Ce morceau de code ne devra s'afficher que si l'utilisateur connecte est un admin-->
+
+        <mat-divider *ngIf="isCustomer"></mat-divider>
+        <div class="operations" *ngIf="isCustomer">
+            <button mat-raised-button color="accent" class="add-to-cart-button">Ajouter au panier</button>
+        </div>
     </mat-card>
 </div>

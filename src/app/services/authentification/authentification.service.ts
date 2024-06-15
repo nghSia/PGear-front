@@ -3,6 +3,8 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs';
 import { UserStorageService } from '../storage/user-storage.service';
+import { AbstractControl, ValidationErrors } from '@angular/forms';
+
 
 //back end applciation URL
 const BASIC_URL = "http://localhost:8080/";
@@ -39,4 +41,16 @@ export class AuthentificationService {
       })
     )
   }
+
+
+  passwordValidator(control: AbstractControl): ValidationErrors | null {
+    const c_value : string = control.value;
+    const c_hasMinimumLength : boolean = c_value.length >= 12;
+    const c_hasSpecialCharacter : boolean = /[!@#$%^&*(),.?":{}|<>]/.test(c_value);
+    const c_hasNumber : boolean = /\d/.test(c_value);
+
+    const passwordValid = c_hasMinimumLength && c_hasSpecialCharacter && c_hasNumber;
+    return !passwordValid ? { passwordStrength: true } : null;
+  }
+
 }

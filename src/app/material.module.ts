@@ -9,6 +9,10 @@ import { MatInputModule } from '@angular/material/input';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatSelectModule } from '@angular/material/select';
 import { MatDividerModule } from '@angular/material/divider';
+import {MatCheckboxModule} from '@angular/material/checkbox';
+import { MatDialogModule } from '@angular/material/dialog';
+
+
 
 
 
@@ -24,7 +28,9 @@ import { MatDividerModule } from '@angular/material/divider';
         MatInputModule,
         MatMenuModule,
         MatSelectModule,
-        MatDividerModule
+        MatDividerModule,
+        MatCheckboxModule,
+        MatDialogModule
     ]
 })
 export class MaterialModule { }

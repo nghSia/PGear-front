@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { product } from 'src/app/shared/models/product';
-import { SharedService } from 'src/app/shared/service/visitor/shared.service';
+import { SharedService } from 'src/app/shared/service/shared.service';
 
 @Component({
   selector: 'app-visitor-accueil',
