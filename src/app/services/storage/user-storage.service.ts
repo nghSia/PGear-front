@@ -35,7 +35,8 @@ export class UserStorageService {
 
   static getUserId(): string{
     const c_user = this.getUser();
-    return c_user? c_user.userId : '';
+    console.log("getUserId" + c_user);
+    return c_user? c_user.userid : '';
   }
 
   static getUserRole(): string {

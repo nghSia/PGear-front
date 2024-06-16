@@ -31,7 +31,9 @@
 
         <mat-divider *ngIf="isCustomer"></mat-divider>
         <div class="operations" *ngIf="isCustomer">
-            <button mat-raised-button color="accent" class="add-to-cart-button">Ajouter au panier</button>
+            <button mat-raised-button color="accent" class="add-to-cart-button" (click)="addToCart(product.id)">
+                Ajouter au panier
+            </button>
         </div>
     </mat-card>
 </div>
