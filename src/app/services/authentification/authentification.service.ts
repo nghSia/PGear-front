@@ -26,8 +26,7 @@ export class AuthentificationService {
     console.log("headears : " + JSON.stringify(headers) + " body: " + JSON.stringify(body));
     return this.v_http.post(BASIC_URL + `login`, body, { headers, observe: 'response'}).pipe(
       map((res) =>{
-        console.log("rights exists");
-        const token = res.headers.get('authorization')?.substring(7);
+        const token = res.headers.get('Authorization')?.substring(7);
         const user = res.body;
         console.log("token : " + token + " user : " + user);
 

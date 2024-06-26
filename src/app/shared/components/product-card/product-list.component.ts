@@ -14,7 +14,6 @@ export class ProductListComponent {
   @Input() isAdmin: boolean = false;
   @Input() isCustomer: boolean = false;
   @Input() refreshProductsCallback: () => void;
-  @Input() refreshByCategorie: () => void;
 
   constructor(
     private s_adminService : AdminService,

@@ -1,10 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, SecurityContext } from '@angular/core';
 import { AbstractControl, FormBuilder, FormGroup, ValidationErrors, Validators } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar'
 import { Router } from '@angular/router';
 import { AuthentificationService } from '../services/authentification/authentification.service';
 import { MatDialog } from '@angular/material/dialog';
 import { PoliticComponent } from '../shared/components/politic/politic.component';
+import { DomSanitizer } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-register',
@@ -21,23 +22,22 @@ export class RegisterComponent implements OnInit {
     private snackbar : MatSnackBar,
     private s_authService : AuthentificationService,
     private router: Router,
-    private m_dialog : MatDialog
+    private m_dialog : MatDialog,
+    private sanitizer: DomSanitizer
   ){}
 
   ngOnInit(): void {
     this.signupForm = this.formBuilder.group({
       username:[null, [Validators.required]],
       email:[null, [Validators.required, Validators.email]],
-      password:[null, [Validators.required, this.passwordValidator!]],
+      password:[null, [Validators.required]],
       confirmpassword:[null, [Validators.required]],
       acceptTerms:[null,[Validators.requiredTrue]]
     })
   }
-
   TogglePassWordVisibility(){
     this.hidePassword = !this.hidePassword;
   }
-
   passwordValidator(control: AbstractControl): ValidationErrors | null{
     const c_value : string = control.value;
     if(c_value == null){
@@ -50,6 +50,17 @@ export class RegisterComponent implements OnInit {
     const passwordValid : boolean = c_hasMinimumLength && c_hasSpecialCharacter && c_hasNumber;
     return !passwordValid ? { passwordStrength: true } : null;
   }
+  usernameValidator(control: AbstractControl): ValidationErrors | null {
+    const c_value: string = control.value;
+    if (c_value == null) {
+      return null;
+    }
+    const c_hasMinimumLength: boolean = c_value.length >= 5;
+    const c_isNotNumericOnly: boolean = !/^\d+$/.test(c_value);
+
+    const usernameValid: boolean = c_hasMinimumLength && c_isNotNumericOnly;
+    return !usernameValid ? { usernameInvalid: true } : null;
+  }
 
   OnSubmit() : void{
       const password : string = this.signupForm.get('password')?.value;
@@ -60,7 +71,15 @@ export class RegisterComponent implements OnInit {
         return;
       }
 
-      this.s_authService.register(this.signupForm.value).subscribe(
+      const c_sanitizedForm = {
+        username: this.sanitize(this.signupForm.get('username')?.value, SecurityContext.SCRIPT),
+        email: this.sanitize(this.signupForm.get('email')?.value, SecurityContext.SCRIPT),
+        password: this.sanitize(this.signupForm.get('password')?.value, SecurityContext.SCRIPT),
+        confirmpassword: this.sanitize(this.signupForm.get('confirmpassword')?.value, SecurityContext.SCRIPT),
+        acceptTerms: this.signupForm.get('acceptTerms')?.value
+      };
+
+      this.s_authService.register(c_sanitizedForm).subscribe(
         {
           next : () => {
             this.snackbar.open('Inscription termine', 'Fermer', {duration : 5000});
@@ -71,6 +90,11 @@ export class RegisterComponent implements OnInit {
           }
         }
       )
+  }
+
+
+  private sanitize(value: string, p_context: SecurityContext): string {
+    return this.sanitizer.sanitize(p_context, value) || '';
   }
 
   openDialog(){

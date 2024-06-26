@@ -39,19 +39,16 @@ export class AppComponent implements OnInit{
     });
   }
 
-  getProductsByCategory(p_nameCategory){
-    this.m_listOfproducts = []; 
-    console.log(p_nameCategory);
-    this.s_sharedService.getProductsByCategory(p_nameCategory).subscribe(res =>{
-      res.forEach(element => {
-        element.imgProduit = 'data:image/jpeg;base64,' + element.imgProduit;
-        this.m_listOfproducts.push(element);
-      });
-    })
+  setCategory(category: string) {
+    this.v_router.navigate(['/home/categorie', { categorie: category }]);
   }
 
-  setCategory(category: string) {
-    this.v_router.navigate(['/home', { categorie: category }]);
+  setCategoryAdmin(category: string) {
+    this.v_router.navigate(['/admin/categorie', { categorie: category }]);
+  }
+
+  setCategoryCustomer(category: string) {
+    this.v_router.navigate(['/customer/categorie', { categorie: category }]);
   }
 
   signout(){
@@ -59,8 +56,16 @@ export class AppComponent implements OnInit{
     this.v_router.navigateByUrl('');
   }
 
-  reload() : void{
-    window.location.reload();
+  reloadHomePage() : void{
+    window.location.href = '/';
+  } 
+  
+  reloadAdminAccueil() : void {
+    window.location.href = "/admin/accueil";
+  }
+
+  reloadCustomerAccueil() : void {
+    window.location.href = "/customer/accueil";
   }
 
   checkScreenWidth(): void {

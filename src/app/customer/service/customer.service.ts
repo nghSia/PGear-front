@@ -23,7 +23,6 @@ export class CustomerService {
       productId : p_productId,
       userId : UserStorageService.getUserId()
     }
-    console.log("produit : " + cart.productId + "userId : " + cart.userId);
     return this.v_http.post(BASIC_URL + `cart/add`, cart, {
       headers: this.createAuthorizationHeader(),
     })
